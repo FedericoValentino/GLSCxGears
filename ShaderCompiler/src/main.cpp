@@ -7,18 +7,38 @@
 
 const char* vertexShaderSource =
         "#version 100\n"  // OpenGL SC uses GLSL ES 1.00
-        "attribute vec4 aPosition;    \n"
-        "void main() {                \n"
-        "   gl_Position = aPosition;  \n"
-        "}                            \n";
+        "attribute vec3 aPos;                                                     \n"
+        "attribute vec3 aNorm;                                                    \n"
+        "uniform mat4 model;                                                      \n"
+        "uniform mat4 view;                                                       \n"
+        "uniform mat4 projection;                                                 \n"
+        "uniform mat3 normalMatrix;                                               \n"
+        "varying vec3 Normal;                                                     \n"
+        "varying vec3 FragPos;                                                    \n"
+        "void main() {                                                            \n"
+        "   gl_Position = projection * view * model * vec4(aPos, 1.0);            \n"
+        "   FragPos = vec3(model * vec4(aPos, 1.0));                              \n"
+        "   Normal = normalize(normalMatrix * aNorm);                             \n"
+        "}                                                                        \n";
 
 // Fragment shader source code
 const char* fragmentShaderSource =
         "#version 100\n"  // OpenGL SC uses GLSL ES 1.00
-        "precision mediump float;     \n"
-        "void main() {                \n"
-        "   gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); \n"
-        "}                            \n";
+        "precision mediump float;                                                 \n"
+        "varying vec3 Normal;                                                     \n"
+        "varying vec3 FragPos;                                                    \n"
+        "uniform vec4 color;                                                      \n"
+        "void main() {                                                            \n"
+        "   vec3 ambient = vec3(0.3, 0.3, 0.3);                                   \n"
+        "   vec3 lightPos = vec3(5.0, 5.0, 10.0);                                 \n"
+        "   vec3 norm = normalize(Normal);                                        \n"
+        "   vec3 lightDir = normalize(lightPos - FragPos);                        \n"
+        "   float diff = max(dot(norm, lightDir), 0.0);                           \n"
+        "   vec3 diffuse = diff * vec3(1.0, 1.0, 1.0);                            \n"
+        "   vec3 result = (ambient + diffuse) * vec3(color);                      \n"
+        "   gl_FragColor = vec4(result, 1.0);                                     \n"
+
+        "}\n";
 
 // Function to compile shaders
 GLuint compileShader(GLenum type, const char* source) {
