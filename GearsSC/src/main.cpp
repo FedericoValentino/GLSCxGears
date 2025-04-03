@@ -52,23 +52,9 @@ float dt = 0.0f;        // Store delta time
 
 void update()
 {
-    // Calculate the time elapsed (delta time)
-    float currentTime = glfwGetTime(); // Returns time in seconds since GLFW was initialized
-    dt = currentTime - lastTime;       // Calculate delta time (current time - previous time)
-    lastTime = currentTime;            // Update last time to current time for next frame
-}
-
-
-#include <sys/time.h>
-
-/* return current time (in seconds) */
-static double
-current_time(void)
-{
-    struct timeval tv;
-    struct timezone tz;
-    (void) gettimeofday(&tv, &tz);
-    return (double) tv.tv_sec + tv.tv_usec / 1000000.0;
+    float currentTime = glfwGetTime();
+    dt = currentTime - lastTime;
+    lastTime = currentTime;
 }
 
 
@@ -523,8 +509,11 @@ void drawObject()
 
 void draw()
 {
-    while (!glfwWindowShouldClose(window)) {
+    float start, end;
+    unsigned long long count = 0;
 
+    start = glfwGetTime();
+    while (!glfwWindowShouldClose(window)) {
         update();
         globalAngle += 70.0f * dt;  /* 70 degrees per second */
         if (globalAngle > 3600.0)
@@ -535,6 +524,19 @@ void draw()
         glfwSwapBuffers(window);
 
         glfwPollEvents();
+
+        count++;
+
+        end = glfwGetTime();
+
+        float elapsed_time = end - start;
+
+        if(elapsed_time >= 5.0)
+        {
+            std::cout<<"Generated "<<count<<"frames in 5 seconds"<<std::endl;
+            start = glfwGetTime();
+            count = 0;
+        }
     }
 }
 
