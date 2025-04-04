@@ -8,6 +8,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#define BINARY_FORMAT 36385
+
 typedef struct {
     //Vertex Data
     std::vector<glm::vec3> FrontFace;
@@ -64,7 +66,7 @@ GLuint createProgram(char* filename) {
     std::ifstream file(filename, std::ios::binary);
     std::vector<uint8_t> binary((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 
-    GLenum binaryFormat = 36385;
+    GLenum binaryFormat = BINARY_FORMAT;
     glProgramBinary(program, binaryFormat, binary.data(), binary.size());
     file.close();
     return program;
