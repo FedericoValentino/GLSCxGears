@@ -563,6 +563,25 @@ int main() {
 
     init();
 
+    printf("Gear1 using %zu vertices\n", gear1.FrontTeethFace.size() +
+                                            gear1.FrontFace.size() +
+                                            gear1.BackFace.size() +
+                                            gear1.BackTeethFace.size() +
+                                            gear1.OutFaceTeeth.size() +
+                                            gear1.InsideRadius.size());
+    printf("Gear2 using %zu vertices\n", gear2.FrontTeethFace.size() +
+                                       gear2.FrontFace.size() +
+                                       gear2.BackFace.size() +
+                                       gear2.BackTeethFace.size() +
+                                       gear2.OutFaceTeeth.size() +
+                                       gear2.InsideRadius.size());
+    printf("Gear3 using %zu vertices\n", gear3.FrontTeethFace.size() +
+                                       gear3.FrontFace.size() +
+                                       gear3.BackFace.size() +
+                                       gear3.BackTeethFace.size() +
+                                       gear3.OutFaceTeeth.size() +
+                                       gear3.InsideRadius.size());
+
     draw();
 
 
