@@ -1,9 +1,14 @@
 @echo off
 
+IF "%~2"=="" (
+   echo Usage: Compile&Run.bat <PathToGCC> <PathToG++>
+   exit /b 1
+)
+
 mkdir build
 cd build
 
-cmake -G "MinGW Makefiles" -DCMAKE_C_COMPILER="C:\MinGW\bin\gcc.exe" -DCMAKE_CXX_COMPILER="C:\MinGW\bin\g++.exe" ..
+cmake -G "MinGW Makefiles" -DCMAKE_C_COMPILER=%1 -DCMAKE_CXX_COMPILER=%2 ..
 
 cmake --build . --target ShaderCompiler
 

@@ -60,7 +60,7 @@ void update()
 }
 
 
-GLuint createProgram(char* filename) {
+GLuint createProgram(const char* filename) {
     GLuint program = glCreateProgram();
 
     std::ifstream file(filename, std::ios::binary);

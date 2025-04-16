@@ -36,7 +36,7 @@ Finally, to build and run the application launch:
 ```
 * Windows:
 ```
-Compile&Run.bat
+Compile&Run.bat <PathToGCC> <PathToG++>
 ```
 
 # Running the built application
