@@ -17,6 +17,7 @@ binaryFormat=$(./ShaderCompiler/ShaderCompiler)
 sed -i "s/^#define BINARY_FORMAT.*/#define BINARY_FORMAT ${binaryFormat}/" GearsSC/src/main.cpp
 
 #Move the compiled shaders to the main application shaders folder
+mkdir GearsSC/shaders
 mv shader.bin GearsSC/shaders/
 
 cd build
