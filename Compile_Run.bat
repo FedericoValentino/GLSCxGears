@@ -1,7 +1,7 @@
 @echo off
 
 IF "%~2"=="" (
-   echo Usage: Compile&Run.bat <PathToGCC> <PathToG++>
+   echo Usage: Compile_Run.bat ^<PathToGCC^> ^<PathToG++^>
    exit /b 1
 )
 
