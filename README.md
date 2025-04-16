@@ -32,11 +32,11 @@ cd GLSCxGears
 Finally, to build and run the application launch:
 * Linux:
 ```
-./Compile&Run.sh
+./Compile_Run.sh
 ```
 * Windows:
 ```
-Compile&Run.bat <PathToGCC> <PathToG++>
+Compile_Run.bat <PathToGCC> <PathToG++>
 ```
 
 # Running the built application
